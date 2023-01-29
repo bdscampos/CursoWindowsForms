@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CursoWindowsForms
+﻿namespace CursoWindowsFormsLibrary
 {
     public static class Utils
     {
@@ -41,6 +35,12 @@ namespace CursoWindowsForms
                 resto = 11 - resto;
             digito = digito + resto.ToString();
             return cpf.EndsWith(digito);
+        }
+
+        public static bool ValidaSenhaLogin(string pwd)
+        {
+            if (pwd == "curso") return true;
+            return false;
         }
     }
 }

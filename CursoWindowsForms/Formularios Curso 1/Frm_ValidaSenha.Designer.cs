@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_ValidaSenha));
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Limpa = new System.Windows.Forms.Button();
             this.txt_Senha = new System.Windows.Forms.TextBox();
             this.lbl_Resultado = new System.Windows.Forms.Label();
             this.btn_MostraSenha = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btn_Limpa
             // 
-            this.button1.Location = new System.Drawing.Point(245, 42);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Limpa";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Limpa.Location = new System.Drawing.Point(245, 42);
+            this.btn_Limpa.Name = "btn_Limpa";
+            this.btn_Limpa.Size = new System.Drawing.Size(111, 23);
+            this.btn_Limpa.TabIndex = 0;
+            this.btn_Limpa.Text = "Limpa";
+            this.btn_Limpa.UseVisualStyleBackColor = true;
+            this.btn_Limpa.Click += new System.EventHandler(this.btn_Limpa_Click);
             // 
             // txt_Senha
             // 
@@ -81,8 +81,10 @@
             this.Controls.Add(this.btn_MostraSenha);
             this.Controls.Add(this.lbl_Resultado);
             this.Controls.Add(this.txt_Senha);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Limpa);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Frm_ValidaSenha";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Validação de Senhas";
@@ -93,7 +95,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Limpa;
         private System.Windows.Forms.TextBox txt_Senha;
         private System.Windows.Forms.Label lbl_Resultado;
         private System.Windows.Forms.Button btn_MostraSenha;

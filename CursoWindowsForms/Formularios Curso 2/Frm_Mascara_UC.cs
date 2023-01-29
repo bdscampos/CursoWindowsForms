@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CursoWindowsForms
 {
-    public partial class Frm_Mascara : Form
+    public partial class Frm_Mascara_UC : UserControl
     {
-        public Frm_Mascara()
+        public Frm_Mascara_UC()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace CursoWindowsForms
             msk_TextBox.Text = "";
             msk_TextBox.Mask = "00000-000";
             lbl_MascaraAtiva.Text = msk_TextBox.Mask;
-            msk_TextBox.Focus(); 
+            msk_TextBox.Focus();
             lbl_Conteudo.Text = "";
         }
 
@@ -81,5 +81,6 @@ namespace CursoWindowsForms
         {
             lbl_Conteudo.Text = msk_TextBox.Text;
         }
+
     }
 }

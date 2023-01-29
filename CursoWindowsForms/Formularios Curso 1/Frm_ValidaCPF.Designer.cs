@@ -81,7 +81,9 @@
             this.Controls.Add(this.btn_Reset);
             this.Controls.Add(this.lbl_Resultado);
             this.Controls.Add(this.msk_Cpf);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Frm_ValidaCPF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Validação CPF";

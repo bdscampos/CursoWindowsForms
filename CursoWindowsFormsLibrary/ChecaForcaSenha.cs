@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 
 public class ChecaForcaSenha
     {
-
         public enum ForcaDaSenha
         {
             Inaceitavel,
