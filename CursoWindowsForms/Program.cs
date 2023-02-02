@@ -16,6 +16,4 @@ namespace CursoWindowsForms
             Application.Run(new Frm_Principal_Menu_UC());
         }
     }
-
-
 }
