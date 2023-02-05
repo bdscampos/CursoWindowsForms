@@ -293,8 +293,5 @@ namespace CursoWindowsForms
             tc_Aplicacoes.TabPages.Remove(tb);
         }
 
-        
-
-
     }
 }

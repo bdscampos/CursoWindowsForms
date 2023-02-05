@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_CadastroCliente_UC));
             this.lbl_CPF = new System.Windows.Forms.Label();
             this.txt_NomeCliente = new System.Windows.Forms.TextBox();
             this.lbl_NomeCliente = new System.Windows.Forms.Label();
@@ -49,27 +50,34 @@
             this.lbl_Profissao = new System.Windows.Forms.Label();
             this.txt_RendaFamiliar = new System.Windows.Forms.TextBox();
             this.lbl_RendaFamiliar = new System.Windows.Forms.Label();
-            this.txt_Codigo = new System.Windows.Forms.TextBox();
             this.gb_Codigo = new System.Windows.Forms.GroupBox();
+            this.txt_Codigo = new System.Windows.Forms.MaskedTextBox();
             this.gb_DadosPessoais = new System.Windows.Forms.GroupBox();
             this.chk_TemPai = new System.Windows.Forms.CheckBox();
+            this.gb_Genero = new System.Windows.Forms.GroupBox();
+            this.rb_Masculino = new System.Windows.Forms.RadioButton();
+            this.rb_Indefinido = new System.Windows.Forms.RadioButton();
+            this.rb_Feminino = new System.Windows.Forms.RadioButton();
             this.txt_CPF = new System.Windows.Forms.MaskedTextBox();
             this.gb_Endereco = new System.Windows.Forms.GroupBox();
+            this.cmb_Estado = new System.Windows.Forms.ComboBox();
             this.lbl_Cidade = new System.Windows.Forms.Label();
             this.txt_Cidade = new System.Windows.Forms.TextBox();
             this.txt_CEP = new System.Windows.Forms.MaskedTextBox();
             this.gb_Outros = new System.Windows.Forms.GroupBox();
             this.txt_Telefone = new System.Windows.Forms.MaskedTextBox();
-            this.rb_Masculino = new System.Windows.Forms.RadioButton();
-            this.rb_Feminino = new System.Windows.Forms.RadioButton();
-            this.rb_Indefinido = new System.Windows.Forms.RadioButton();
-            this.gb_Genero = new System.Windows.Forms.GroupBox();
-            this.cmb_Estado = new System.Windows.Forms.ComboBox();
+            this.tsp_Principal = new System.Windows.Forms.ToolStrip();
+            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.clearToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.gb_Codigo.SuspendLayout();
             this.gb_DadosPessoais.SuspendLayout();
+            this.gb_Genero.SuspendLayout();
             this.gb_Endereco.SuspendLayout();
             this.gb_Outros.SuspendLayout();
-            this.gb_Genero.SuspendLayout();
+            this.tsp_Principal.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_CPF
@@ -267,22 +275,23 @@
             this.lbl_RendaFamiliar.TabIndex = 24;
             this.lbl_RendaFamiliar.Text = "label1";
             // 
-            // txt_Codigo
-            // 
-            this.txt_Codigo.Location = new System.Drawing.Point(6, 29);
-            this.txt_Codigo.Name = "txt_Codigo";
-            this.txt_Codigo.Size = new System.Drawing.Size(126, 20);
-            this.txt_Codigo.TabIndex = 0;
-            // 
             // gb_Codigo
             // 
             this.gb_Codigo.Controls.Add(this.txt_Codigo);
-            this.gb_Codigo.Location = new System.Drawing.Point(12, 8);
+            this.gb_Codigo.Location = new System.Drawing.Point(12, 38);
             this.gb_Codigo.Name = "gb_Codigo";
-            this.gb_Codigo.Size = new System.Drawing.Size(149, 56);
+            this.gb_Codigo.Size = new System.Drawing.Size(72, 56);
             this.gb_Codigo.TabIndex = 28;
             this.gb_Codigo.TabStop = false;
             this.gb_Codigo.Text = "groupBox1";
+            // 
+            // txt_Codigo
+            // 
+            this.txt_Codigo.Location = new System.Drawing.Point(9, 19);
+            this.txt_Codigo.Mask = "000000";
+            this.txt_Codigo.Name = "txt_Codigo";
+            this.txt_Codigo.Size = new System.Drawing.Size(48, 20);
+            this.txt_Codigo.TabIndex = 0;
             // 
             // gb_DadosPessoais
             // 
@@ -296,7 +305,7 @@
             this.gb_DadosPessoais.Controls.Add(this.lbl_NomePai);
             this.gb_DadosPessoais.Controls.Add(this.txt_NomePai);
             this.gb_DadosPessoais.Controls.Add(this.lbl_CPF);
-            this.gb_DadosPessoais.Location = new System.Drawing.Point(12, 70);
+            this.gb_DadosPessoais.Location = new System.Drawing.Point(12, 100);
             this.gb_DadosPessoais.Name = "gb_DadosPessoais";
             this.gb_DadosPessoais.Size = new System.Drawing.Size(783, 190);
             this.gb_DadosPessoais.TabIndex = 29;
@@ -309,15 +318,60 @@
             this.chk_TemPai.Location = new System.Drawing.Point(420, 127);
             this.chk_TemPai.Name = "chk_TemPai";
             this.chk_TemPai.Size = new System.Drawing.Size(80, 17);
-            this.chk_TemPai.TabIndex = 0;
+            this.chk_TemPai.TabIndex = 4;
             this.chk_TemPai.Text = "checkBox1";
             this.chk_TemPai.UseVisualStyleBackColor = true;
             this.chk_TemPai.CheckedChanged += new System.EventHandler(this.chk_TemPai_CheckedChanged);
             // 
+            // gb_Genero
+            // 
+            this.gb_Genero.Controls.Add(this.rb_Masculino);
+            this.gb_Genero.Controls.Add(this.rb_Indefinido);
+            this.gb_Genero.Controls.Add(this.rb_Feminino);
+            this.gb_Genero.Controls.Add(this.lbl_Genero);
+            this.gb_Genero.Location = new System.Drawing.Point(118, 147);
+            this.gb_Genero.Name = "gb_Genero";
+            this.gb_Genero.Size = new System.Drawing.Size(277, 37);
+            this.gb_Genero.TabIndex = 35;
+            this.gb_Genero.TabStop = false;
+            // 
+            // rb_Masculino
+            // 
+            this.rb_Masculino.AutoSize = true;
+            this.rb_Masculino.Location = new System.Drawing.Point(6, 17);
+            this.rb_Masculino.Name = "rb_Masculino";
+            this.rb_Masculino.Size = new System.Drawing.Size(85, 17);
+            this.rb_Masculino.TabIndex = 32;
+            this.rb_Masculino.TabStop = true;
+            this.rb_Masculino.Text = "radioButton1";
+            this.rb_Masculino.UseVisualStyleBackColor = true;
+            // 
+            // rb_Indefinido
+            // 
+            this.rb_Indefinido.AutoSize = true;
+            this.rb_Indefinido.Location = new System.Drawing.Point(188, 17);
+            this.rb_Indefinido.Name = "rb_Indefinido";
+            this.rb_Indefinido.Size = new System.Drawing.Size(85, 17);
+            this.rb_Indefinido.TabIndex = 34;
+            this.rb_Indefinido.TabStop = true;
+            this.rb_Indefinido.Text = "radioButton3";
+            this.rb_Indefinido.UseVisualStyleBackColor = true;
+            // 
+            // rb_Feminino
+            // 
+            this.rb_Feminino.AutoSize = true;
+            this.rb_Feminino.Location = new System.Drawing.Point(97, 17);
+            this.rb_Feminino.Name = "rb_Feminino";
+            this.rb_Feminino.Size = new System.Drawing.Size(85, 17);
+            this.rb_Feminino.TabIndex = 33;
+            this.rb_Feminino.TabStop = true;
+            this.rb_Feminino.Text = "radioButton2";
+            this.rb_Feminino.UseVisualStyleBackColor = true;
+            // 
             // txt_CPF
             // 
             this.txt_CPF.Location = new System.Drawing.Point(9, 164);
-            this.txt_CPF.Mask = "000,000,000-00";
+            this.txt_CPF.Mask = "00000000000";
             this.txt_CPF.Name = "txt_CPF";
             this.txt_CPF.Size = new System.Drawing.Size(100, 20);
             this.txt_CPF.TabIndex = 5;
@@ -336,12 +390,20 @@
             this.gb_Endereco.Controls.Add(this.lbl_Bairro);
             this.gb_Endereco.Controls.Add(this.txt_Bairro);
             this.gb_Endereco.Controls.Add(this.lbl_Estado);
-            this.gb_Endereco.Location = new System.Drawing.Point(12, 266);
+            this.gb_Endereco.Location = new System.Drawing.Point(12, 296);
             this.gb_Endereco.Name = "gb_Endereco";
             this.gb_Endereco.Size = new System.Drawing.Size(783, 118);
             this.gb_Endereco.TabIndex = 30;
             this.gb_Endereco.TabStop = false;
             this.gb_Endereco.Text = "groupBox1";
+            // 
+            // cmb_Estado
+            // 
+            this.cmb_Estado.FormattingEnabled = true;
+            this.cmb_Estado.Location = new System.Drawing.Point(589, 77);
+            this.cmb_Estado.Name = "cmb_Estado";
+            this.cmb_Estado.Size = new System.Drawing.Size(188, 21);
+            this.cmb_Estado.TabIndex = 22;
             // 
             // lbl_Cidade
             // 
@@ -368,10 +430,11 @@
             this.txt_CEP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.txt_CEP.Location = new System.Drawing.Point(9, 36);
-            this.txt_CEP.Mask = "00000-000";
+            this.txt_CEP.Mask = "00000000";
             this.txt_CEP.Name = "txt_CEP";
             this.txt_CEP.Size = new System.Drawing.Size(63, 20);
             this.txt_CEP.TabIndex = 6;
+            this.txt_CEP.Leave += new System.EventHandler(this.txt_CEP_Leave);
             // 
             // gb_Outros
             // 
@@ -381,7 +444,7 @@
             this.gb_Outros.Controls.Add(this.txt_Profissao);
             this.gb_Outros.Controls.Add(this.txt_RendaFamiliar);
             this.gb_Outros.Controls.Add(this.lbl_RendaFamiliar);
-            this.gb_Outros.Location = new System.Drawing.Point(12, 390);
+            this.gb_Outros.Location = new System.Drawing.Point(12, 420);
             this.gb_Outros.Name = "gb_Outros";
             this.gb_Outros.Size = new System.Drawing.Size(351, 110);
             this.gb_Outros.TabIndex = 31;
@@ -392,85 +455,100 @@
             // 
             this.txt_Telefone.BackColor = System.Drawing.SystemColors.Window;
             this.txt_Telefone.Location = new System.Drawing.Point(9, 34);
-            this.txt_Telefone.Mask = "(00) 00000-0000";
+            this.txt_Telefone.Mask = "00000000000";
             this.txt_Telefone.Name = "txt_Telefone";
             this.txt_Telefone.Size = new System.Drawing.Size(100, 20);
             this.txt_Telefone.TabIndex = 12;
             // 
-            // rb_Masculino
+            // tsp_Principal
             // 
-            this.rb_Masculino.AutoSize = true;
-            this.rb_Masculino.Location = new System.Drawing.Point(6, 17);
-            this.rb_Masculino.Name = "rb_Masculino";
-            this.rb_Masculino.Size = new System.Drawing.Size(85, 17);
-            this.rb_Masculino.TabIndex = 32;
-            this.rb_Masculino.TabStop = true;
-            this.rb_Masculino.Text = "radioButton1";
-            this.rb_Masculino.UseVisualStyleBackColor = true;
+            this.tsp_Principal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripButton,
+            this.openToolStripButton,
+            this.saveToolStripButton,
+            this.deleteToolStripButton,
+            this.clearToolStripButton});
+            this.tsp_Principal.Location = new System.Drawing.Point(0, 0);
+            this.tsp_Principal.Name = "tsp_Principal";
+            this.tsp_Principal.Size = new System.Drawing.Size(806, 25);
+            this.tsp_Principal.TabIndex = 32;
+            this.tsp_Principal.Text = "toolStrip1";
             // 
-            // rb_Feminino
+            // newToolStripButton
             // 
-            this.rb_Feminino.AutoSize = true;
-            this.rb_Feminino.Location = new System.Drawing.Point(97, 17);
-            this.rb_Feminino.Name = "rb_Feminino";
-            this.rb_Feminino.Size = new System.Drawing.Size(85, 17);
-            this.rb_Feminino.TabIndex = 33;
-            this.rb_Feminino.TabStop = true;
-            this.rb_Feminino.Text = "radioButton2";
-            this.rb_Feminino.UseVisualStyleBackColor = true;
+            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
+            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripButton.Name = "newToolStripButton";
+            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
             // 
-            // rb_Indefinido
+            // openToolStripButton
             // 
-            this.rb_Indefinido.AutoSize = true;
-            this.rb_Indefinido.Location = new System.Drawing.Point(188, 17);
-            this.rb_Indefinido.Name = "rb_Indefinido";
-            this.rb_Indefinido.Size = new System.Drawing.Size(85, 17);
-            this.rb_Indefinido.TabIndex = 34;
-            this.rb_Indefinido.TabStop = true;
-            this.rb_Indefinido.Text = "radioButton3";
-            this.rb_Indefinido.UseVisualStyleBackColor = true;
+            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
+            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripButton.Name = "openToolStripButton";
+            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
-            // gb_Genero
+            // saveToolStripButton
             // 
-            this.gb_Genero.Controls.Add(this.rb_Masculino);
-            this.gb_Genero.Controls.Add(this.rb_Indefinido);
-            this.gb_Genero.Controls.Add(this.rb_Feminino);
-            this.gb_Genero.Controls.Add(this.lbl_Genero);
-            this.gb_Genero.Location = new System.Drawing.Point(118, 147);
-            this.gb_Genero.Name = "gb_Genero";
-            this.gb_Genero.Size = new System.Drawing.Size(277, 37);
-            this.gb_Genero.TabIndex = 35;
-            this.gb_Genero.TabStop = false;
+            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
-            // cmb_Estado
+            // deleteToolStripButton
             // 
-            this.cmb_Estado.FormattingEnabled = true;
-            this.cmb_Estado.Location = new System.Drawing.Point(589, 77);
-            this.cmb_Estado.Name = "cmb_Estado";
-            this.cmb_Estado.Size = new System.Drawing.Size(188, 21);
-            this.cmb_Estado.TabIndex = 22;
+            this.deleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteToolStripButton.Image = global::CursoWindowsForms.Properties.Resources.ExcluirBarra;
+            this.deleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deleteToolStripButton.Name = "deleteToolStripButton";
+            this.deleteToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.deleteToolStripButton.Text = "&Delete";
+            this.deleteToolStripButton.Click += new System.EventHandler(this.deleteToolStripButton_Click);
+            // 
+            // clearToolStripButton
+            // 
+            this.clearToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.clearToolStripButton.Image = global::CursoWindowsForms.Properties.Resources.LimparBarra;
+            this.clearToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clearToolStripButton.Name = "clearToolStripButton";
+            this.clearToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.clearToolStripButton.Text = "&Clear";
+            this.clearToolStripButton.Click += new System.EventHandler(this.clearToolStripButton_Click);
             // 
             // Frm_CadastroCliente_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tsp_Principal);
             this.Controls.Add(this.gb_Outros);
             this.Controls.Add(this.gb_Endereco);
             this.Controls.Add(this.gb_DadosPessoais);
             this.Controls.Add(this.gb_Codigo);
             this.Name = "Frm_CadastroCliente_UC";
-            this.Size = new System.Drawing.Size(806, 525);
+            this.Size = new System.Drawing.Size(806, 552);
             this.gb_Codigo.ResumeLayout(false);
             this.gb_Codigo.PerformLayout();
             this.gb_DadosPessoais.ResumeLayout(false);
             this.gb_DadosPessoais.PerformLayout();
+            this.gb_Genero.ResumeLayout(false);
+            this.gb_Genero.PerformLayout();
             this.gb_Endereco.ResumeLayout(false);
             this.gb_Endereco.PerformLayout();
             this.gb_Outros.ResumeLayout(false);
             this.gb_Outros.PerformLayout();
-            this.gb_Genero.ResumeLayout(false);
-            this.gb_Genero.PerformLayout();
+            this.tsp_Principal.ResumeLayout(false);
+            this.tsp_Principal.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -497,7 +575,6 @@
         private System.Windows.Forms.Label lbl_Profissao;
         private System.Windows.Forms.TextBox txt_RendaFamiliar;
         private System.Windows.Forms.Label lbl_RendaFamiliar;
-        private System.Windows.Forms.TextBox txt_Codigo;
         private System.Windows.Forms.GroupBox gb_Codigo;
         private System.Windows.Forms.GroupBox gb_DadosPessoais;
         private System.Windows.Forms.GroupBox gb_Endereco;
@@ -513,5 +590,12 @@
         private System.Windows.Forms.RadioButton rb_Indefinido;
         private System.Windows.Forms.RadioButton rb_Feminino;
         private System.Windows.Forms.ComboBox cmb_Estado;
+        private System.Windows.Forms.ToolStrip tsp_Principal;
+        private System.Windows.Forms.ToolStripButton newToolStripButton;
+        private System.Windows.Forms.ToolStripButton openToolStripButton;
+        private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        private System.Windows.Forms.ToolStripButton deleteToolStripButton;
+        private System.Windows.Forms.ToolStripButton clearToolStripButton;
+        private System.Windows.Forms.MaskedTextBox txt_Codigo;
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CursoWindowsFormsLibrary;
+using CursoWindowsFormsLibrary.Models;
+using Microsoft.VisualBasic;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
 namespace CursoWindowsForms
@@ -70,6 +67,12 @@ namespace CursoWindowsForms
             cmb_Estado.Items.Add("São Paulo (SP)");
             cmb_Estado.Items.Add("Sergipe (SE)");
             cmb_Estado.Items.Add("Tocantins (TO)");
+
+            tsp_Principal.Items[0].ToolTipText = "Incluir novo cliente na base de dados";
+            tsp_Principal.Items[1].ToolTipText = "Buscar um cliente na base de dados";
+            tsp_Principal.Items[2].ToolTipText = "Atualizar cliente na base de dados";
+            tsp_Principal.Items[3].ToolTipText = "Apagar um cliente da base de dados";
+            tsp_Principal.Items[4].ToolTipText = "Limpar o formulário de cadastro";
         }
 
         private void chk_TemPai_CheckedChanged(object sender, EventArgs e)
@@ -82,6 +85,117 @@ namespace CursoWindowsForms
             else
             {
                 txt_NomePai.Enabled = true;
+            }
+        }
+
+        private void newToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                Cliente.Unit cliente = new Cliente.Unit();
+                cliente = LeituraFormulario();
+                cliente.ValidaClasse();
+                cliente.ValidaComplemento();
+                MessageBox.Show("Cliente cadastrado com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (ValidationException exc)
+            {
+                MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private Cliente.Unit LeituraFormulario()
+        {
+            bool temPai;
+            int genero = 0;
+            double renda = 0;
+            
+            if (chk_TemPai.Checked)
+            {
+                temPai = true;
+            }
+            else
+            {
+                temPai = false;
+            }
+            if (rb_Masculino.Checked)
+            {
+                genero = 0;
+            }
+            else if (rb_Feminino.Checked)
+            {
+                genero = 1;
+            }
+            else if (rb_Indefinido.Checked)
+            {
+                genero = 2;
+            }
+
+            if (Information.IsNumeric(txt_RendaFamiliar.Text))
+            {
+                double rendaConvertida = Convert.ToDouble(txt_RendaFamiliar.Text);
+                if (rendaConvertida > 0)
+                {
+                    renda = rendaConvertida;
+                }
+            }
+
+
+
+            return new Cliente.Unit(txt_Codigo.Text, txt_NomeCliente.Text, txt_NomePai.Text, 
+                txt_NomeMae.Text, temPai, txt_CPF.Text, genero, txt_CEP.Text, txt_Logradouro.Text, txt_Complemento.Text,
+                txt_Bairro.Text, txt_Cidade.Text, cmb_Estado.Items[cmb_Estado.SelectedIndex].ToString(), 
+                txt_Telefone.Text, txt_Profissao.Text, renda);
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clearToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_CEP_Leave(object sender, EventArgs e)
+        {
+            if (txt_CEP.Text != "" && txt_CEP.Text.Length == 8)
+            {
+                var json = Utils.GeraJSONCEP(txt_CEP.Text);
+                Cep.Unit cep = new Cep.Unit();
+                cep = Cep.DeserializeClassUnit(json);
+                
+                txt_Logradouro.Text = cep.logradouro;
+                txt_Cidade.Text = cep.localidade;
+                txt_Bairro.Text = cep.bairro;
+                foreach (string estado in cmb_Estado.Items)
+                {
+                    if (estado.Contains("(" + cep.uf + ")"))
+                    {
+                        cmb_Estado.SelectedItem = estado;
+                        break;
+                    }
+                    else
+                    {
+                        cmb_Estado.SelectedItem = null;
+                    }
+                }
             }
         }
     }
