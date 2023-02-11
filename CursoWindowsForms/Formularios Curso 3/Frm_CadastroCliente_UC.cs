@@ -1,7 +1,10 @@
-﻿using CursoWindowsFormsLibrary;
+﻿using CursoWindowsForms.Formulários_Curso_5;
+using CursoWindowsFormsLibrary;
+using CursoWindowsFormsLibrary.Database;
 using CursoWindowsFormsLibrary.Models;
 using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
@@ -12,6 +15,8 @@ namespace CursoWindowsForms
         public Frm_CadastroCliente_UC()
         {
             InitializeComponent();
+
+            btn_Busca.Text = "Buscar";
 
             gb_Codigo.Text = "Código";
             gb_DadosPessoais.Text = "Dados Pessoais";
@@ -92,12 +97,11 @@ namespace CursoWindowsForms
         {
             try
             {
-                
                 Cliente.Unit cliente = new Cliente.Unit();
                 cliente = LeituraFormulario();
                 cliente.ValidaClasse();
                 cliente.ValidaComplemento();
-                MessageBox.Show("Cliente cadastrado com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                cliente.IncluirFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
             }
             catch (ValidationException exc)
             {
@@ -153,24 +157,173 @@ namespace CursoWindowsForms
                 txt_Telefone.Text, txt_Profissao.Text, renda);
         }
 
+        private void LimpaFormulario()
+        {
+            txt_Codigo.Clear();
+            txt_NomeCliente.Clear();
+            txt_NomePai.Clear();
+            txt_NomeMae.Clear();
+            chk_TemPai.Checked = false;
+            txt_CPF.Clear();
+            rb_Feminino.Checked = false;
+            rb_Indefinido.Checked = false;
+            rb_Masculino.Checked = false;
+            txt_CEP.Clear();
+            txt_Logradouro.Clear();
+            txt_Complemento.Clear();
+            txt_Bairro.Clear();
+            txt_Cidade.Clear();
+            cmb_Estado.SelectedItem = null;
+            txt_Telefone.Clear();
+            txt_Profissao.Clear();
+            txt_RendaFamiliar.Clear();
+        }
+
+        private void PreencheFormulario(Cliente.Unit cliente)
+        {
+            try
+            {
+                switch (cliente.Genero)
+                {
+                    case 0:
+                        rb_Masculino.Checked = true;
+                        break;
+                    case 1:
+                        rb_Feminino.Checked = true;
+                        break;
+                    case 2:
+                        rb_Indefinido.Checked = true;
+                        break;
+                    default: break;
+                }
+                if (cliente.NaoTemPai)
+                {
+                    chk_TemPai.Checked = true;
+                }
+                else
+                {
+                    chk_TemPai.Checked = false;
+                }
+                txt_Codigo.Text = cliente.Id;
+                txt_NomeCliente.Text = cliente.Nome;
+                txt_NomeMae.Text = cliente.NomeMae;
+                txt_NomePai.Text = cliente.NomePai;
+                txt_CPF.Text = cliente.CPF;
+                txt_Cidade.Text = cliente.Cidade;
+                txt_Profissao.Text = cliente.Profissao;
+                txt_Logradouro.Text = cliente.Logradouro;
+                txt_CEP.Text = cliente.CEP;
+                txt_RendaFamiliar.Text = cliente.RendaFamiliar.ToString();
+                txt_Cidade.Text = cliente.Cidade;
+                txt_Bairro.Text = cliente.Bairro;
+                txt_Complemento.Text = cliente.Complemento;
+                txt_Telefone.Text = cliente.Telefone;
+                foreach (string estado in cmb_Estado.Items)
+                {
+                    if (estado.Contains(cliente.Estado))
+                    {
+                        cmb_Estado.SelectedItem = estado;
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Falha ao localizar o cliente", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-
+            if (txt_Codigo.Text == "")
+            {
+                MessageBox.Show("Código do cliente não pode ser vazio", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    Cliente.Unit cliente = new Cliente.Unit();
+                    PreencheFormulario(cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro: " + ex.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-
+            if (txt_Codigo.Text == "")
+            {
+                MessageBox.Show("Código do cliente não pode ser vazio", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    Cliente.Unit cliente = new Cliente.Unit();
+                    cliente = LeituraFormulario();
+                    cliente.ValidaClasse();
+                    cliente.ValidaComplemento();
+                    cliente.AlterarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                }
+                catch (ValidationException exc)
+                {
+                    MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void deleteToolStripButton_Click(object sender, EventArgs e)
         {
 
+            if (txt_Codigo.Text == "")
+            {
+                MessageBox.Show("Código do cliente não pode ser vazio", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                try
+                {
+                    Cliente.Unit cliente = new Cliente.Unit();
+                    cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text);
+                    if (cliente != null)
+                    {
+                        PreencheFormulario(cliente);
+                        if (MessageBox.Show("Deseja realmente excluir o cliente?", "ByteBank", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        {
+                            if (cliente.ApagarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario"))
+                            {
+                                LimpaFormulario();
+                                MessageBox.Show("Cliente excluído com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Falha ao excluir o cliente", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cliente não localizado", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Falha: " + ex.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                }
+            }
         }
 
         private void clearToolStripButton_Click(object sender, EventArgs e)
         {
-
+            LimpaFormulario();
         }
 
         private void txt_CEP_Leave(object sender, EventArgs e)
@@ -196,6 +349,50 @@ namespace CursoWindowsForms
                         cmb_Estado.SelectedItem = null;
                     }
                 }
+            }
+        }
+
+        private void btn_Busca_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cliente.Unit cliente = new Cliente.Unit();
+                List<string> list = cliente.BuscarTudoFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                if (list != null)
+                {
+                    List<List<string>> ListaBusca = new List<List<string>>();
+                    foreach (string item in list)
+                    {
+                        cliente = Cliente.DeserializeClassUnit(item);
+                        ListaBusca.Add(new List<String> { cliente.Id, cliente.Nome });
+                    }
+                    Frm_Busca Fform = new Frm_Busca(ListaBusca);
+                    if (Fform.ShowDialog() == DialogResult.OK)
+                    {
+                        string idSelected = Fform.idSelected;
+                        cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", idSelected);
+                        if (cliente != null)
+                        {
+                            PreencheFormulario(cliente);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cliente não localizado", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Falha ao buscar clientes", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -173,6 +173,12 @@
     <Compile Include="Formularios Curso 3\Frm_CadastroCliente_UC.Designer.cs">
       <DependentUpon>Frm_CadastroCliente_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formulários Curso 5\Frm_Busca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulários Curso 5\Frm_Busca.Designer.cs">
+      <DependentUpon>Frm_Busca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios Curso 3\Frm_MouseEvents.resx">
       <DependentUpon>Frm_MouseEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulários Curso 5\Frm_Busca.resx">
+      <DependentUpon>Frm_Busca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Principal.resx">
       <DependentUpon>Frm_Principal.cs</DependentUpon>

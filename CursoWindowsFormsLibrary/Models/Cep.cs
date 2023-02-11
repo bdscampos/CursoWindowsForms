@@ -27,5 +27,10 @@ namespace CursoWindowsFormsLibrary.Models
         {
             return JsonConvert.DeserializeObject<Unit>(json);
         }
+
+        public static string SerializeClassUnit(Unit unit)
+        {
+            return JsonConvert.SerializeObject(unit);
+        }
     }
 }

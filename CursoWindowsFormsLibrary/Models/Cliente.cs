@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using CursoWindowsFormsLibrary.Database;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CursoWindowsFormsLibrary.Models
 {
@@ -101,6 +106,100 @@ namespace CursoWindowsFormsLibrary.Models
                 if (!this.NaoTemPai && this.NomePai == "") throw new System.Exception("Nome do Pai não pode ser vazio");
                 if (!Utils.Valida(this.CPF)) throw new System.Exception("CPF Inválido");
         }
+
+            #region CRUD Fichario
+
+            public void IncluirFichario(string conexao)
+            {
+                Fichario f = new Fichario(conexao);
+                string json = JsonConvert.SerializeObject(this);
+                if (f.Status)
+                {
+                    
+                    if (f.Incluir(this.Id, json))
+                    {
+                        MessageBox.Show("Sucesso: Cliente incluído com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        throw new Exception(f.Mensagem);
+                    }
+                }
+                else
+                {
+                    throw new Exception(f.Mensagem);
+                }
+            }
+
+            public Unit BuscarClienteFichario(string conexao, string id)
+            {
+                Fichario f = new Fichario(conexao);
+                if (f.Status)
+                {
+                    return Cliente.DeserializeClassUnit(f.Buscar(id));
+                }
+                else
+                {
+                    throw new Exception(f.Mensagem);
+                }
+            }
+
+            public void AlterarFichario(string conexao)
+            {
+                Fichario f = new Fichario(conexao);
+                string json = Cliente.SerializeClassUnit(this);
+                if (f.Status)
+                {
+                    if (f.Alterar(this.Id, json))
+                    {
+                        MessageBox.Show("Sucesso: Cliente alterado com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        throw new Exception(f.Mensagem);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            public bool ApagarFichario(string conexao)
+            {
+                Fichario f = new Fichario(conexao);
+                if (f.Status)
+                {
+                    if (f.Apagar(this.Id))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            public List<string> BuscarTudoFichario(string conexao)
+            {
+                Fichario f = new Fichario(conexao);
+                if (f.Status)
+                {
+                    List<string> list = f.BuscarTudo();
+                    return list;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            #endregion
         }
 
         public class List
@@ -108,6 +207,14 @@ namespace CursoWindowsFormsLibrary.Models
             public List<Unit> ListUnit { get; set; }
         }
 
-        
+        public static Unit DeserializeClassUnit(string json)
+        {
+            return JsonConvert.DeserializeObject<Unit>(json);
+        }
+
+        public static string SerializeClassUnit(Unit unit)
+        {
+            return JsonConvert.SerializeObject(unit);
+        }
     }
 }

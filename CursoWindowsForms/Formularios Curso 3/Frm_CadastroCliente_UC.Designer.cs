@@ -72,6 +72,7 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.clearToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.btn_Busca = new System.Windows.Forms.Button();
             this.gb_Codigo.SuspendLayout();
             this.gb_DadosPessoais.SuspendLayout();
             this.gb_Genero.SuspendLayout();
@@ -277,10 +278,11 @@
             // 
             // gb_Codigo
             // 
+            this.gb_Codigo.Controls.Add(this.btn_Busca);
             this.gb_Codigo.Controls.Add(this.txt_Codigo);
             this.gb_Codigo.Location = new System.Drawing.Point(12, 38);
             this.gb_Codigo.Name = "gb_Codigo";
-            this.gb_Codigo.Size = new System.Drawing.Size(72, 56);
+            this.gb_Codigo.Size = new System.Drawing.Size(150, 56);
             this.gb_Codigo.TabIndex = 28;
             this.gb_Codigo.TabStop = false;
             this.gb_Codigo.Text = "groupBox1";
@@ -524,6 +526,16 @@
             this.clearToolStripButton.Text = "&Clear";
             this.clearToolStripButton.Click += new System.EventHandler(this.clearToolStripButton_Click);
             // 
+            // btn_Busca
+            // 
+            this.btn_Busca.Location = new System.Drawing.Point(63, 19);
+            this.btn_Busca.Name = "btn_Busca";
+            this.btn_Busca.Size = new System.Drawing.Size(75, 20);
+            this.btn_Busca.TabIndex = 1;
+            this.btn_Busca.Text = "button1";
+            this.btn_Busca.UseVisualStyleBackColor = true;
+            this.btn_Busca.Click += new System.EventHandler(this.btn_Busca_Click);
+            // 
             // Frm_CadastroCliente_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,5 +609,6 @@
         private System.Windows.Forms.ToolStripButton deleteToolStripButton;
         private System.Windows.Forms.ToolStripButton clearToolStripButton;
         private System.Windows.Forms.MaskedTextBox txt_Codigo;
+        private System.Windows.Forms.Button btn_Busca;
     }
 }
