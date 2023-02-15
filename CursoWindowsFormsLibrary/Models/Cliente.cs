@@ -107,7 +107,7 @@ namespace CursoWindowsFormsLibrary.Models
                 if (!Utils.Valida(this.CPF)) throw new System.Exception("CPF Inválido");
         }
 
-            #region CRUD Fichario
+            #region CRUD Fichario System.IO
 
             public void IncluirFichario(string conexao)
             {
@@ -188,6 +188,102 @@ namespace CursoWindowsFormsLibrary.Models
             public List<string> BuscarTudoFichario(string conexao)
             {
                 Fichario f = new Fichario(conexao);
+                if (f.Status)
+                {
+                    List<string> list = f.BuscarTudo();
+                    return list;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            #endregion            
+            
+            
+            
+            #region CRUD FicharioDB
+
+            public void IncluirFicharioDB(string conexao)
+            {
+                FicharioDB f = new FicharioDB(conexao);
+                string json = JsonConvert.SerializeObject(this);
+                if (f.Status)
+                {
+                    
+                    if (f.Incluir(this.Id, json))
+                    {
+                        MessageBox.Show("Sucesso: Cliente incluído com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        throw new Exception(f.Message);
+                    }
+                }
+                else
+                {
+                    throw new Exception(f.Message);
+                }
+            }
+
+            public Unit BuscarClienteFicharioDB(string conexao, string id)
+            {
+                FicharioDB f = new FicharioDB(conexao);
+                if (f.Status)
+                {
+                    return Cliente.DeserializeClassUnit(f.Buscar(id));
+                }
+                else
+                {
+                    throw new Exception(f.Message);
+                }
+            }
+
+            public void AlterarFicharioDB(string conexao)
+            {
+                FicharioDB f = new FicharioDB(conexao);
+                string json = Cliente.SerializeClassUnit(this);
+                if (f.Status)
+                {
+                    if (f.Alterar(this.Id, json))
+                    {
+                        MessageBox.Show("Sucesso: Cliente alterado com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        throw new Exception(f.Message);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            public bool ApagarFicharioDB(string conexao)
+            {
+                FicharioDB f = new FicharioDB(conexao);
+                if (f.Status)
+                {
+                    if (f.Apagar(this.Id))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+
+            public List<string> BuscarTudoFicharioDB(string conexao)
+            {
+                FicharioDB f = new FicharioDB(conexao);
                 if (f.Status)
                 {
                     List<string> list = f.BuscarTudo();

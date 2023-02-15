@@ -86,8 +86,7 @@ namespace CursoWindowsFormsLibrary.Database
                 string[] arquivos = Directory.GetFiles(Diretorio, "*.json");
                 foreach (string str in arquivos)
                 {
-                    list.Add(File.ReadAllText(str));
-                    
+                    list.Add(File.ReadAllText(str));                    
                 }
             }
             catch (Exception e)

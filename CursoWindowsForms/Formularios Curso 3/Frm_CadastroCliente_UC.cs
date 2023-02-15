@@ -101,7 +101,8 @@ namespace CursoWindowsForms
                 cliente = LeituraFormulario();
                 cliente.ValidaClasse();
                 cliente.ValidaComplemento();
-                cliente.IncluirFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                //cliente.IncluirFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                cliente.IncluirFicharioDB("Cliente");
             }
             catch (ValidationException exc)
             {
@@ -243,7 +244,8 @@ namespace CursoWindowsForms
                 try
                 {
                     Cliente.Unit cliente = new Cliente.Unit();
-                    PreencheFormulario(cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text));
+                    //PreencheFormulario(cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text));
+                    PreencheFormulario(cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text));
                 }
                 catch (Exception ex)
                 {
@@ -266,7 +268,8 @@ namespace CursoWindowsForms
                     cliente = LeituraFormulario();
                     cliente.ValidaClasse();
                     cliente.ValidaComplemento();
-                    cliente.AlterarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                    //cliente.AlterarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                    cliente.AlterarFicharioDB("Cliente");
                 }
                 catch (ValidationException exc)
                 {
@@ -292,13 +295,15 @@ namespace CursoWindowsForms
                 try
                 {
                     Cliente.Unit cliente = new Cliente.Unit();
-                    cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text);
+                    //cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text);
+                    cliente = cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text);
                     if (cliente != null)
                     {
                         PreencheFormulario(cliente);
                         if (MessageBox.Show("Deseja realmente excluir o cliente?", "ByteBank", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                         {
-                            if (cliente.ApagarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario"))
+                            //if (cliente.ApagarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario"))
+                            if (cliente.ApagarFicharioDB("Cliente"))
                             {
                                 LimpaFormulario();
                                 MessageBox.Show("Cliente excluído com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -357,7 +362,8 @@ namespace CursoWindowsForms
             try
             {
                 Cliente.Unit cliente = new Cliente.Unit();
-                List<string> list = cliente.BuscarTudoFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                //List<string> list = cliente.BuscarTudoFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
+                List<string> list = cliente.BuscarTudoFicharioDB("Cliente");
                 if (list != null)
                 {
                     List<List<string>> ListaBusca = new List<List<string>>();
@@ -370,7 +376,8 @@ namespace CursoWindowsForms
                     if (Fform.ShowDialog() == DialogResult.OK)
                     {
                         string idSelected = Fform.idSelected;
-                        cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", idSelected);
+                        //cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", idSelected);
+                        cliente = cliente.BuscarClienteFicharioDB("Cliente", idSelected);
                         if (cliente != null)
                         {
                             PreencheFormulario(cliente);
