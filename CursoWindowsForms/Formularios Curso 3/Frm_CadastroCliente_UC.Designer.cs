@@ -51,6 +51,7 @@
             this.txt_RendaFamiliar = new System.Windows.Forms.TextBox();
             this.lbl_RendaFamiliar = new System.Windows.Forms.Label();
             this.gb_Codigo = new System.Windows.Forms.GroupBox();
+            this.btn_Busca = new System.Windows.Forms.Button();
             this.txt_Codigo = new System.Windows.Forms.MaskedTextBox();
             this.gb_DadosPessoais = new System.Windows.Forms.GroupBox();
             this.chk_TemPai = new System.Windows.Forms.CheckBox();
@@ -72,13 +73,18 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.clearToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.btn_Busca = new System.Windows.Forms.Button();
+            this.gb_DataGrid = new System.Windows.Forms.GroupBox();
+            this.dgv_Clientes = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_Codigo.SuspendLayout();
             this.gb_DadosPessoais.SuspendLayout();
             this.gb_Genero.SuspendLayout();
             this.gb_Endereco.SuspendLayout();
             this.gb_Outros.SuspendLayout();
             this.tsp_Principal.SuspendLayout();
+            this.gb_DataGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Clientes)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_CPF
@@ -96,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_NomeCliente.Location = new System.Drawing.Point(6, 44);
             this.txt_NomeCliente.Name = "txt_NomeCliente";
-            this.txt_NomeCliente.Size = new System.Drawing.Size(771, 20);
+            this.txt_NomeCliente.Size = new System.Drawing.Size(674, 20);
             this.txt_NomeCliente.TabIndex = 1;
             // 
             // lbl_NomeCliente
@@ -114,7 +120,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_NomeMae.Location = new System.Drawing.Point(6, 84);
             this.txt_NomeMae.Name = "txt_NomeMae";
-            this.txt_NomeMae.Size = new System.Drawing.Size(408, 20);
+            this.txt_NomeMae.Size = new System.Drawing.Size(311, 20);
             this.txt_NomeMae.TabIndex = 2;
             // 
             // lbl_NomeMae
@@ -132,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_NomePai.Location = new System.Drawing.Point(6, 124);
             this.txt_NomePai.Name = "txt_NomePai";
-            this.txt_NomePai.Size = new System.Drawing.Size(408, 20);
+            this.txt_NomePai.Size = new System.Drawing.Size(311, 20);
             this.txt_NomePai.TabIndex = 3;
             // 
             // lbl_NomePai
@@ -166,11 +172,12 @@
             // 
             // txt_Logradouro
             // 
-            this.txt_Logradouro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txt_Logradouro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_Logradouro.Location = new System.Drawing.Point(85, 36);
             this.txt_Logradouro.Name = "txt_Logradouro";
-            this.txt_Logradouro.Size = new System.Drawing.Size(692, 20);
+            this.txt_Logradouro.Size = new System.Drawing.Size(595, 20);
             this.txt_Logradouro.TabIndex = 7;
             // 
             // lbl_Logradouro
@@ -287,6 +294,16 @@
             this.gb_Codigo.TabStop = false;
             this.gb_Codigo.Text = "groupBox1";
             // 
+            // btn_Busca
+            // 
+            this.btn_Busca.Location = new System.Drawing.Point(63, 19);
+            this.btn_Busca.Name = "btn_Busca";
+            this.btn_Busca.Size = new System.Drawing.Size(75, 20);
+            this.btn_Busca.TabIndex = 1;
+            this.btn_Busca.Text = "button1";
+            this.btn_Busca.UseVisualStyleBackColor = true;
+            this.btn_Busca.Click += new System.EventHandler(this.btn_Busca_Click);
+            // 
             // txt_Codigo
             // 
             this.txt_Codigo.Location = new System.Drawing.Point(9, 19);
@@ -309,7 +326,7 @@
             this.gb_DadosPessoais.Controls.Add(this.lbl_CPF);
             this.gb_DadosPessoais.Location = new System.Drawing.Point(12, 100);
             this.gb_DadosPessoais.Name = "gb_DadosPessoais";
-            this.gb_DadosPessoais.Size = new System.Drawing.Size(783, 190);
+            this.gb_DadosPessoais.Size = new System.Drawing.Size(686, 190);
             this.gb_DadosPessoais.TabIndex = 29;
             this.gb_DadosPessoais.TabStop = false;
             this.gb_DadosPessoais.Text = "groupBox1";
@@ -317,7 +334,7 @@
             // chk_TemPai
             // 
             this.chk_TemPai.AutoSize = true;
-            this.chk_TemPai.Location = new System.Drawing.Point(420, 127);
+            this.chk_TemPai.Location = new System.Drawing.Point(323, 127);
             this.chk_TemPai.Name = "chk_TemPai";
             this.chk_TemPai.Size = new System.Drawing.Size(80, 17);
             this.chk_TemPai.TabIndex = 4;
@@ -394,17 +411,19 @@
             this.gb_Endereco.Controls.Add(this.lbl_Estado);
             this.gb_Endereco.Location = new System.Drawing.Point(12, 296);
             this.gb_Endereco.Name = "gb_Endereco";
-            this.gb_Endereco.Size = new System.Drawing.Size(783, 118);
+            this.gb_Endereco.Size = new System.Drawing.Size(686, 118);
             this.gb_Endereco.TabIndex = 30;
             this.gb_Endereco.TabStop = false;
             this.gb_Endereco.Text = "groupBox1";
             // 
             // cmb_Estado
             // 
+            this.cmb_Estado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_Estado.FormattingEnabled = true;
             this.cmb_Estado.Location = new System.Drawing.Point(589, 77);
             this.cmb_Estado.Name = "cmb_Estado";
-            this.cmb_Estado.Size = new System.Drawing.Size(188, 21);
+            this.cmb_Estado.Size = new System.Drawing.Size(91, 21);
             this.cmb_Estado.TabIndex = 22;
             // 
             // lbl_Cidade
@@ -472,7 +491,7 @@
             this.clearToolStripButton});
             this.tsp_Principal.Location = new System.Drawing.Point(0, 0);
             this.tsp_Principal.Name = "tsp_Principal";
-            this.tsp_Principal.Size = new System.Drawing.Size(806, 25);
+            this.tsp_Principal.Size = new System.Drawing.Size(1146, 25);
             this.tsp_Principal.TabIndex = 32;
             this.tsp_Principal.Text = "toolStrip1";
             // 
@@ -526,27 +545,60 @@
             this.clearToolStripButton.Text = "&Clear";
             this.clearToolStripButton.Click += new System.EventHandler(this.clearToolStripButton_Click);
             // 
-            // btn_Busca
+            // gb_DataGrid
             // 
-            this.btn_Busca.Location = new System.Drawing.Point(63, 19);
-            this.btn_Busca.Name = "btn_Busca";
-            this.btn_Busca.Size = new System.Drawing.Size(75, 20);
-            this.btn_Busca.TabIndex = 1;
-            this.btn_Busca.Text = "button1";
-            this.btn_Busca.UseVisualStyleBackColor = true;
-            this.btn_Busca.Click += new System.EventHandler(this.btn_Busca_Click);
+            this.gb_DataGrid.Controls.Add(this.dgv_Clientes);
+            this.gb_DataGrid.Location = new System.Drawing.Point(704, 104);
+            this.gb_DataGrid.Name = "gb_DataGrid";
+            this.gb_DataGrid.Size = new System.Drawing.Size(434, 461);
+            this.gb_DataGrid.TabIndex = 33;
+            this.gb_DataGrid.TabStop = false;
+            this.gb_DataGrid.Text = "groupBox1";
+            // 
+            // dgv_Clientes
+            // 
+            this.dgv_Clientes.AllowUserToAddRows = false;
+            this.dgv_Clientes.AllowUserToDeleteRows = false;
+            this.dgv_Clientes.AllowUserToOrderColumns = true;
+            this.dgv_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Clientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Nome});
+            this.dgv_Clientes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Clientes.Location = new System.Drawing.Point(3, 16);
+            this.dgv_Clientes.MultiSelect = false;
+            this.dgv_Clientes.Name = "dgv_Clientes";
+            this.dgv_Clientes.ReadOnly = true;
+            this.dgv_Clientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Clientes.Size = new System.Drawing.Size(428, 442);
+            this.dgv_Clientes.TabIndex = 0;
+            this.dgv_Clientes.DoubleClick += new System.EventHandler(this.dgv_Clientes_DoubleClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Código do Cliente";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Nome
+            // 
+            this.Nome.HeaderText = "Nome do Cliente";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            this.Nome.Width = 250;
             // 
             // Frm_CadastroCliente_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.gb_DataGrid);
             this.Controls.Add(this.tsp_Principal);
             this.Controls.Add(this.gb_Outros);
             this.Controls.Add(this.gb_Endereco);
             this.Controls.Add(this.gb_DadosPessoais);
             this.Controls.Add(this.gb_Codigo);
             this.Name = "Frm_CadastroCliente_UC";
-            this.Size = new System.Drawing.Size(806, 552);
+            this.Size = new System.Drawing.Size(1146, 586);
             this.gb_Codigo.ResumeLayout(false);
             this.gb_Codigo.PerformLayout();
             this.gb_DadosPessoais.ResumeLayout(false);
@@ -559,6 +611,8 @@
             this.gb_Outros.PerformLayout();
             this.tsp_Principal.ResumeLayout(false);
             this.tsp_Principal.PerformLayout();
+            this.gb_DataGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Clientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -610,5 +664,9 @@
         private System.Windows.Forms.ToolStripButton clearToolStripButton;
         private System.Windows.Forms.MaskedTextBox txt_Codigo;
         private System.Windows.Forms.Button btn_Busca;
+        private System.Windows.Forms.GroupBox gb_DataGrid;
+        private System.Windows.Forms.DataGridView dgv_Clientes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
     }
 }

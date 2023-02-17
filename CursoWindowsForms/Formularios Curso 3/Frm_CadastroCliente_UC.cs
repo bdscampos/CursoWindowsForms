@@ -22,6 +22,7 @@ namespace CursoWindowsForms
             gb_DadosPessoais.Text = "Dados Pessoais";
             gb_Endereco.Text = "Endereço";
             gb_Outros.Text = "Outros";
+            gb_DataGrid.Text = "Clientes";
 
             chk_TemPai.Text = "Pai desconhecido";
 
@@ -78,6 +79,8 @@ namespace CursoWindowsForms
             tsp_Principal.Items[2].ToolTipText = "Atualizar cliente na base de dados";
             tsp_Principal.Items[3].ToolTipText = "Apagar um cliente da base de dados";
             tsp_Principal.Items[4].ToolTipText = "Limpar o formulário de cadastro";
+
+            AtualizaGridView();
         }
 
         private void chk_TemPai_CheckedChanged(object sender, EventArgs e)
@@ -102,7 +105,10 @@ namespace CursoWindowsForms
                 cliente.ValidaClasse();
                 cliente.ValidaComplemento();
                 //cliente.IncluirFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
-                cliente.IncluirFicharioDB("Cliente");
+                //cliente.IncluirFicharioDB("Cliente");
+                //cliente.IncluirFicharioSQL("Cliente");
+                cliente.IncluirFicharioSQLRel();
+                AtualizaGridView();
             }
             catch (ValidationException exc)
             {
@@ -116,17 +122,17 @@ namespace CursoWindowsForms
 
         private Cliente.Unit LeituraFormulario()
         {
-            bool temPai;
+            int temPai;
             int genero = 0;
             double renda = 0;
             
             if (chk_TemPai.Checked)
             {
-                temPai = true;
+                temPai = 1;
             }
             else
             {
-                temPai = false;
+                temPai = 0;
             }
             if (rb_Masculino.Checked)
             {
@@ -197,7 +203,7 @@ namespace CursoWindowsForms
                         break;
                     default: break;
                 }
-                if (cliente.NaoTemPai)
+                if (cliente.NaoTemPai == 1)
                 {
                     chk_TemPai.Checked = true;
                 }
@@ -245,7 +251,9 @@ namespace CursoWindowsForms
                 {
                     Cliente.Unit cliente = new Cliente.Unit();
                     //PreencheFormulario(cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text));
-                    PreencheFormulario(cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text));
+                    //PreencheFormulario(cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text));
+                    //PreencheFormulario(cliente.BuscarClienteFicharioSQL("Cliente", txt_Codigo.Text));
+                    PreencheFormulario(cliente.BuscarFicharioSQLRel(txt_Codigo.Text));
                 }
                 catch (Exception ex)
                 {
@@ -269,7 +277,10 @@ namespace CursoWindowsForms
                     cliente.ValidaClasse();
                     cliente.ValidaComplemento();
                     //cliente.AlterarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
-                    cliente.AlterarFicharioDB("Cliente");
+                    //cliente.AlterarFicharioDB("Cliente");
+                    //cliente.AlterarFicharioSQL("Cliente");
+                    cliente.AlterarFicharioSQLRel();
+                    AtualizaGridView();
                 }
                 catch (ValidationException exc)
                 {
@@ -296,17 +307,22 @@ namespace CursoWindowsForms
                 {
                     Cliente.Unit cliente = new Cliente.Unit();
                     //cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", txt_Codigo.Text);
-                    cliente = cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text);
+                    //cliente = cliente.BuscarClienteFicharioDB("Cliente", txt_Codigo.Text);
+                    //cliente = cliente.BuscarClienteFicharioSQL("Cliente", txt_Codigo.Text);
+                    cliente = cliente.BuscarFicharioSQLRel(txt_Codigo.Text);
                     if (cliente != null)
                     {
                         PreencheFormulario(cliente);
                         if (MessageBox.Show("Deseja realmente excluir o cliente?", "ByteBank", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                         {
                             //if (cliente.ApagarFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario"))
-                            if (cliente.ApagarFicharioDB("Cliente"))
+                            //if (cliente.ApagarFicharioDB("Cliente"))
+                            //if (cliente.ApagarFicharioSQL("Cliente"))
+                            if (cliente.ApagarFicharioSQLRel())
                             {
                                 LimpaFormulario();
                                 MessageBox.Show("Cliente excluído com sucesso", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                AtualizaGridView();
                             }
                             else
                             {
@@ -363,21 +379,26 @@ namespace CursoWindowsForms
             {
                 Cliente.Unit cliente = new Cliente.Unit();
                 //List<string> list = cliente.BuscarTudoFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario");
-                List<string> list = cliente.BuscarTudoFicharioDB("Cliente");
+                //List<string> list = cliente.BuscarTudoFicharioDB("Cliente");
+                //List<string> list = cliente.BuscarTudoFicharioSQL("Cliente");
+                List<List<string>> list = cliente.BuscarTudoFicharioSQLRel();
                 if (list != null)
                 {
                     List<List<string>> ListaBusca = new List<List<string>>();
-                    foreach (string item in list)
+                    foreach (List<string> item in list)
                     {
-                        cliente = Cliente.DeserializeClassUnit(item);
-                        ListaBusca.Add(new List<String> { cliente.Id, cliente.Nome });
+                        //cliente = Cliente.DeserializeClassUnit(item);
+                        //ListaBusca.Add(new List<string> { cliente.Id, cliente.Nome});
+                        ListaBusca.Add(item);
                     }
                     Frm_Busca Fform = new Frm_Busca(ListaBusca);
                     if (Fform.ShowDialog() == DialogResult.OK)
                     {
                         string idSelected = Fform.idSelected;
                         //cliente = cliente.BuscarClienteFichario("D:\\Projetos\\C#\\Alura\\CursoWindowsForms\\Fichario", idSelected);
-                        cliente = cliente.BuscarClienteFicharioDB("Cliente", idSelected);
+                        //cliente = cliente.BuscarClienteFicharioDB("Cliente", idSelected);
+                        //cliente = cliente.BuscarClienteFicharioSQL("Cliente", idSelected);
+                        cliente = cliente.BuscarFicharioSQLRel(idSelected);
                         if (cliente != null)
                         {
                             PreencheFormulario(cliente);
@@ -386,10 +407,6 @@ namespace CursoWindowsForms
                         {
                             MessageBox.Show("Cliente não localizado", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                    }
-                    else
-                    {
-                        
                     }
                 }
                 else
@@ -402,5 +419,54 @@ namespace CursoWindowsForms
                 MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void AtualizaGridView()
+        {
+            try
+            {
+                Cliente.Unit cliente = new Cliente.Unit();
+                List<List<string>> list = cliente.BuscarTudoFicharioSQLRel();
+                dgv_Clientes.Rows.Clear();
+                foreach (List<string> item in list)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgv_Clientes);
+                    row.Cells[0].Value = item[0];
+                    row.Cells[1].Value = item[1];
+                    dgv_Clientes.Rows.Add(row);
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message, "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgv_Clientes_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row = dgv_Clientes.SelectedRows[0];
+                string id = row.Cells[0].Value.ToString();
+                Cliente.Unit cliente = new Cliente.Unit();
+                cliente = cliente.BuscarFicharioSQLRel(id);
+                if (cliente != null)
+                {
+                    PreencheFormulario(cliente);
+                }
+                else
+                {
+                    MessageBox.Show("Cliente não localizado", "ByteBank", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+            
+        }
     }
+
 }
+

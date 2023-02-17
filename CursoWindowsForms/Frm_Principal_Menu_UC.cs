@@ -1,4 +1,5 @@
-﻿using CursoWindowsFormsLibrary;
+﻿using CursoWindowsForms.Formulários_Curso_5;
+using CursoWindowsFormsLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -293,5 +294,10 @@ namespace CursoWindowsForms
             tc_Aplicacoes.TabPages.Remove(tb);
         }
 
+        private void agênciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Agencia Fform = new Frm_Agencia();
+            Fform.ShowDialog();
+        }
     }
 }

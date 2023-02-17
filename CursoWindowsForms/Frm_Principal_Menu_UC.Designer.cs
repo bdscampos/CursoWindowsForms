@@ -51,6 +51,7 @@
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tc_Aplicacoes = new System.Windows.Forms.TabControl();
             this.img_imagens = new System.Windows.Forms.ImageList(this.components);
+            this.agênciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Principal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -186,17 +187,18 @@
             // cadastroToolStripMenuItem
             // 
             this.cadastroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clientesToolStripMenuItem});
+            this.clientesToolStripMenuItem,
+            this.agênciasToolStripMenuItem});
             this.cadastroToolStripMenuItem.Image = global::CursoWindowsForms.Properties.Resources.Cadastros;
             this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
-            this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cadastroToolStripMenuItem.Text = "Cadastro";
             // 
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Image = global::CursoWindowsForms.Properties.Resources.user;
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
@@ -246,6 +248,14 @@
             this.img_imagens.Images.SetKeyName(6, "Folder.png");
             this.img_imagens.Images.SetKeyName(7, "user.png");
             // 
+            // agênciasToolStripMenuItem
+            // 
+            this.agênciasToolStripMenuItem.Image = global::CursoWindowsForms.Properties.Resources.salary;
+            this.agênciasToolStripMenuItem.Name = "agênciasToolStripMenuItem";
+            this.agênciasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agênciasToolStripMenuItem.Text = "Agências";
+            this.agênciasToolStripMenuItem.Click += new System.EventHandler(this.agênciasToolStripMenuItem_Click);
+            // 
             // Frm_Principal_Menu_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,5 +297,6 @@
         private System.Windows.Forms.ToolStripMenuItem byteBankToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agênciasToolStripMenuItem;
     }
 }
